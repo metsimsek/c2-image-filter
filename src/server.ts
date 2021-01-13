@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { filterImageFromURL, deleteLocalFiles } from './util/util';
+import { Request, Response } from 'express';
 
 (async () => {
 
@@ -27,8 +28,8 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
-  app.get("/:image_url", async (req, res) => {
-    let image_url = req.query.image_url;
+  app.get("/:image_url", async (req : Request, res : Response) => {
+    let image_url: string = req.query.image_url;
     if (image_url == null || image_url == "") {
       res.statusCode = 422;
       res.end('image url is not found');
@@ -59,7 +60,7 @@ import { filterImageFromURL, deleteLocalFiles } from './util/util';
 
   // Root Endpoint
   // Displays a simple message to the user
-  app.get("/", async (req, res) => {
+  app.get("/", async (req : Request, res : Response) => {
     res.send("try GET /filteredimage?image_url={{}}")
   });
 
